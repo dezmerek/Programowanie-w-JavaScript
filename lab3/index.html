@@ -10,20 +10,21 @@
 </head>
 
 <body>
-        <audio src="./sounds/clap.wav" id="clap"></audio>
-        <audio src="./sounds/hihat.wav" id="hihat"></audio>
-        <audio src="./sounds/kick.wav" id="kick"></audio>
-        <audio src="./sounds/openhat.wav" id="openhat"></audio>
-        <audio src="./sounds/boom.wav" id="boom"></audio>
-        <audio src="./sounds/ride.wav" id="ride"></audio>
-        <audio src="./sounds/snare.wav" id="snare"></audio>
-        <audio src="./sounds/tom.wav" id="tom"></audio>
-        <audio src="./sounds/tink.wav" id="tink"></audio>
-
+    <audio src="./sounds/boom.wav" id="boom"></audio>
+    <audio src="./sounds/clap.wav" id="clap"></audio>
+    <audio src="./sounds/hihat.wav" id="hihat"></audio>
+    <audio src="./sounds/kick.wav" id="kick"></audio>
+    <audio src="./sounds/openhat.wav" id="openhat"></audio>
+    <audio src="./sounds/ride.wav" id="ride"></audio>
+    <audio src="./sounds/snare.wav" id="snare"></audio>
+    <audio src="./sounds/tink.wav" id="tink"></audio>
+    <audio src="./sounds/tom.wav" id="tom"></audio>
+    
     <div id="keyboard">
         <button id="boom" class="key">Boom</button>
         <button id="clap" class="key">Clap</button>
         <button id="hihat" class="key">Hi-Hat</button>
+        <button id="kick" class="key">Kick</button>
         <button id="openhat" class="key">Open-Hat</button>
         <button id="ride" class="key">Ride</button>
         <button id="snare" class="key">Snare</button>
@@ -31,19 +32,30 @@
         <button id="tom" class="key">Tom</button>
     </div>
 
-    <div id="nagranie">
-        <button id="startNagrywanie1">Nagrywanie 1</button>
-        <button id="startNagrywanie2">Nagrywanie 2</button>
-        <button id="startNagrywanie3">Nagrywanie 3</button>
-        <button id="startNagrywanie4">Nagrywanie 4</button>
-        <br><br>
-        <button id="stopNagrywanie">Zakończ nagrywanie</button>
-        <br><br>
-        <button id="playOdtwarzanie1">Odtwórz nagranie 1</button>
-        <button id="playOdtwarzanie2">Odtwórz nagranie 2</button>
-        <button id="playOdtwarzanie3">Odtwórz nagranie 3</button>
-        <button id="playOdtwarzanie4">Odtwórz nagranie 4</button>
+    <div id="panel1">
+        <button id="startNagrywanie1" class="nagranie">Nagrywanie 1</button>
+        <button id="playOdtwarzanie1" class="odtwarzanie">Odtwórz nagranie 1</button>
     </div>
+
+    <div id="panel2">
+        <button id="startNagrywanie2" class="nagranie">Nagrywanie 2</button>
+        <button id="playOdtwarzanie2" class="odtwarzanie">Odtwórz nagranie 2</button>
+    </div>
+
+    <div id="panel3">
+        <button id="startNagrywanie3" class="nagranie">Nagrywanie 3</button>
+        <button id="playOdtwarzanie3" class="odtwarzanie">Odtwórz nagranie 3</button>
+    </div>
+
+    <div id="panel4">
+        <button id="startNagrywanie4" class="nagranie">Nagrywanie 4</button>
+        <button id="playOdtwarzanie4" class="odtwarzanie">Odtwórz nagranie 4</button>
+    </div>
+
+    <div id="panel5">
+        <button id="stopNagrywanie" class="zakonczenie">Zakończ nagrywanie</button>
+    </div>
+
     <script src="main.js"></script>
 </body>
 
