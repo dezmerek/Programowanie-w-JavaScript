@@ -45,3 +45,7 @@
     .nagranie:hover, .odtwarzanie:hover, .zakonczenie:hover {
         background-color: #555;
     }
+    
+     .active {
+        background-color: gray;
+    }
