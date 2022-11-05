@@ -9,11 +9,11 @@ const kolorInput = document.querySelector("#kolor");
 const pinInput = document.querySelector("#pin");
 const listaNotatek = document.querySelector("#lista-notatek");
 
-//pobieranie elementów radio 
+//pobieranie elementów radio
 const bialyRadio = document.querySelector("#bialy-radio");
 const zielonyRadio = document.querySelector("#zielony-radio");
 const niebieskiRadio = document.querySelector("#niebieski-radio");
-const zoltyRadio = document.querySelector("#zolty-radio")
+const zoltyRadio = document.querySelector("#zolty-radio");
 
 //pobieranie notatek z localStorage
 if (localStorage.getItem("notatki")) {
@@ -22,34 +22,34 @@ if (localStorage.getItem("notatki")) {
 }
 
 //funkcja dodająca nową notatkę
-function dodajNotatke(e){
-    e.preventDefault();
-    //pobieranie danych z inputów
-    const tytul = tytulInput.value;
-    const tresc = trescInput.value;
-    let kolor = "";
-    if(bialyRadio.checked) kolor = "white";
-    if(zielonyRadio.checked) kolor = "green";
-    if(niebieskiRadio.checked) kolor = "aqua";
-    if(zoltyRadio.checked) kolor = "yellow";
-    const pin = pinInput.checked;
-    //tworzenie nowej notatki
-    const nowaNotatka = {
-        tytul,
-        tresc,
-        kolor,
-        pin,
-        data: Date.now()
-    }
-    //dodanie notatki do tablicy
-    notatki.push(nowaNotatka);
-    //zapisanie notatek do localStorage
-    localStorage.setItem("notatki", JSON.stringify(notatki));
-    //renderowanie listy notatek
-    renderujListeNotatek();
-    //czyszczenie inputów
-    tytulInput.value = "";
-    trescInput.value = "";
+function dodajNotatke(e) {
+  e.preventDefault();
+  //pobieranie danych z inputów
+  const tytul = tytulInput.value;
+  const tresc = trescInput.value;
+  let kolor = "";
+  if (bialyRadio.checked) kolor = "white";
+  if (zielonyRadio.checked) kolor = "green";
+  if (niebieskiRadio.checked) kolor = "aqua";
+  if (zoltyRadio.checked) kolor = "yellow";
+  const pin = pinInput.checked;
+  //tworzenie nowej notatki
+  const nowaNotatka = {
+    tytul,
+    tresc,
+    kolor,
+    pin,
+    data: Date.now(),
+  };
+  //dodanie notatki do tablicy
+  notatki.push(nowaNotatka);
+  //zapisanie notatek do localStorage
+  localStorage.setItem("notatki", JSON.stringify(notatki));
+  //renderowanie listy notatek
+  renderujListeNotatek();
+  //czyszczenie inputów
+  tytulInput.value = "";
+  trescInput.value = "";
 }
 
 //nasłuchiwanie na submit formularza
@@ -66,7 +66,7 @@ function renderujListeNotatek() {
     const div = document.createElement("div");
     div.classList.add("notatka");
     if (notatka.pin) {
-      div.classList.add("pinned");
+      div.classList.add("przypięta");
     }
     div.style.backgroundColor = notatka.kolor;
     //tworzenie tytułu
@@ -77,7 +77,16 @@ function renderujListeNotatek() {
     const p = document.createElement("p");
     p.innerHTML = notatka.tresc;
     div.appendChild(p);
-    //dodanie notatki do listy
+    //przycisk usuwania notatki
+    const usunButton = document.createElement("button");
+    usunButton.innerHTML = "Usuń";
+    usunButton.addEventListener("click", () => {
+      notatki.splice(i, 1);
+      localStorage.setItem("notatki", JSON.stringify(notatki));
+      renderujListeNotatek();
+    });
+    div.appendChild(usunButton);
+    //dodanie diva z notatką do listy notatek
     listaNotatek.appendChild(div);
   }
 }
