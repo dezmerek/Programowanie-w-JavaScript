@@ -20,18 +20,30 @@
     <textarea id="tresc" name="tresc"></textarea>
     <br>
     <label for="kolor">Kolor:</label>
-    <select id="kolor" name="kolor">
-      <option value="white">Biały</option>
-      <option value="green">Zielony</option>
-      <option value="blue">Niebieski</option>
-      <option value="yellow">Żółty</option>
-    </select>
+    <label for="bialy-radio">
+      <input type="radio" id="bialy-radio" name="kolor" value="bialy">
+      Biały
+  </label>
+  <label for="zielony-radio">
+      <input type="radio" id="zielony-radio" name="kolor" value="zielony">
+      Zielony
+  </label>
+  <label for="niebieski-radio">
+      <input type="radio" id="niebieski-radio" name="kolor" value="niebieski">
+      Niebieski
+  </label>
+  <label for="zolty-radio">
+      <input type="radio" id="zolty-radio" name="kolor" value="zolty">
+      Żółty
+  </label>
     <br>
     <label for="pin">Przypięcie do góry:</label>
     <input type="checkbox" id="pin" name="pin">
     <br>
     <button type="submit">Dodaj notatkę</button>
   </form>
+
+  <script src="main.js"></script>
 </body>
 
 </html>
