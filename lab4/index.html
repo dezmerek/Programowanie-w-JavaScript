@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notekeep</title>
+</head>
+
+<body>
+  <h1>Lista notatek</h1>
+  <div id="lista-notatek"></div>
+  <br>
+  <form id="formularz-notatki">
+    <label for="tytul">Tytuł:</label>
+    <input type="text" id="tytul" name="tytul">
+    <br>
+    <label for="tresc">Treść:</label>
+    <textarea id="tresc" name="tresc"></textarea>
+    <br>
+    <label for="kolor">Kolor:</label>
+    <select id="kolor" name="kolor">
+      <option value="white">Biały</option>
+      <option value="green">Zielony</option>
+      <option value="blue">Niebieski</option>
+      <option value="yellow">Żółty</option>
+    </select>
+    <br>
+    <label for="pin">Przypięcie do góry:</label>
+    <input type="checkbox" id="pin" name="pin">
+    <br>
+    <button type="submit">Dodaj notatkę</button>
+  </form>
+</body>
+
+</html>
