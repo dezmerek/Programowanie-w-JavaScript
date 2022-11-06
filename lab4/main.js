@@ -33,16 +33,18 @@ function dodajNotatke(e) {
     edytowanaNotatka.pin = pin;
     edytowanaNotatka = null;
     // znajdowanie indeksu notatki w tablicy
-    let index = notatki.findIndex((notatka) => notatka.data === edytowanaNotatka.data);
+    let index = notatki.findIndex(
+      (notatka) => notatka.data === edytowanaNotatka.data
+    );
     // usunięcie notatki z tablicy
     notatki.splice(index, 1);
     // jeśli notatka jest przypięta, bedzie na początku
     if (pin) {
-    notatki.unshift(edytowanaNotatka);
+      notatki.unshift(edytowanaNotatka);
     } else {
-    notatki.push(edytowanaNotatka);
+      notatki.push(edytowanaNotatka);
     }
-    } else {
+  } else {
     //tworzenie nowej notatki
     const nowaNotatka = {
       tytul,
@@ -53,11 +55,11 @@ function dodajNotatke(e) {
     };
     //dodanie notatki do tablicy
     if (pin) {
-    notatki.unshift(nowaNotatka);
+      notatki.unshift(nowaNotatka);
     } else {
-    notatki.push(nowaNotatka);
+      notatki.push(nowaNotatka);
     }
-    }
+  }
   //zapisanie notatek do localStorage
   localStorage.setItem("notatki", JSON.stringify(notatki));
   //renderowanie listy notatek
@@ -96,18 +98,21 @@ function renderujListeNotatek() {
     div.appendChild(p);
     //daty utworzenia
     const span = document.createElement("span");
+    const nowalinia = document.createElement("nowalinia");
     span.innerHTML = new Date(notatka.data).toLocaleDateString(); //bez date = +godzina
+    nowalinia.innerHTML = `<br>`;
     div.appendChild(span);
+    div.appendChild(nowalinia);
     //tworzenie przycisku edycji
     const buttonEdytuj = document.createElement("button");
-    buttonEdytuj.innerHTML = "Edytuj";
+    buttonEdytuj.innerHTML = `Edytuj`;
     buttonEdytuj.addEventListener("click", () => {
       edytujNotatke(notatka);
     });
     div.appendChild(buttonEdytuj);
     //tworzenie przycisku usuwania
     const buttonUsun = document.createElement("button");
-    buttonUsun.innerHTML = "Usuń";
+    buttonUsun.innerHTML = `Usuń`;
     buttonUsun.addEventListener("click", () => {
       usunNotatke(notatka);
     });
