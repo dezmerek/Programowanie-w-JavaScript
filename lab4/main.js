@@ -64,57 +64,61 @@ function renderujListeNotatek() {
   listaNotatek.innerHTML = "";
   //iterowanie po tablicy notatek
   for (let i = 0; i < notatki.length; i++) {
-  const notatka = notatki[i];
-  //tworzenie diva dla notatki
-  const div = document.createElement("div");
-  div.classList.add("notatka");
-  if (notatka.pin) {
-  div.classList.add("pinned");
+    const notatka = notatki[i];
+    //tworzenie diva dla notatki
+    const div = document.createElement("div");
+    div.classList.add("notatka");
+    if (notatka.pin) {
+      div.classList.add("pinned");
+    }
+    div.style.backgroundColor = notatka.kolor;
+    //tworzenie tytułu
+    const h2 = document.createElement("h2");
+    h2.innerHTML = notatka.tytul;
+    div.appendChild(h2);
+    //tworzenie treści
+    const p = document.createElement("p");
+    p.innerHTML = notatka.tresc;
+    div.appendChild(p);
+    //daty utworzenia
+    const span = document.createElement("span");
+    span.innerHTML = new Date(notatka.data).toLocaleDateString(); //bez date = +godzina
+    div.appendChild(span);
+    //tworzenie przycisku edycji
+    const buttonEdytuj = document.createElement("button");
+    buttonEdytuj.innerHTML = "Edytuj";
+    buttonEdytuj.addEventListener("click", () => {
+      edytujNotatke(notatka);
+    });
+    div.appendChild(buttonEdytuj);
+    //tworzenie przycisku usuwania
+    const buttonUsun = document.createElement("button");
+    buttonUsun.innerHTML = "Usuń";
+    buttonUsun.addEventListener("click", () => {
+      usunNotatke(notatka);
+    });
+    div.appendChild(buttonUsun);
+    //dodanie notatki do listy
+    listaNotatek.appendChild(div);
   }
-  div.style.backgroundColor = notatka.kolor;
-  //tworzenie tytułu
-  const h2 = document.createElement("h2");
-  h2.innerHTML = notatka.tytul;
-  div.appendChild(h2);
-  //tworzenie treści
-  const p = document.createElement("p");
-  p.innerHTML = notatka.tresc;
-  div.appendChild(p);
-  //tworzenie przycisku edycji
-  const btnEdit = document.createElement("button");
-  btnEdit.innerHTML = "Edytuj";
-  btnEdit.addEventListener("click", () => {
-  edytujNotatke(notatka);
-  });
-  div.appendChild(btnEdit);
-  //tworzenie przycisku usuwania
-  const btnDelete = document.createElement("button");
-  btnDelete.innerHTML = "Usuń";
-  btnDelete.addEventListener("click", () => {
-  usunNotatke(notatka);
-  });
-  div.appendChild(btnDelete);
-  //dodanie notatki do listy
-  listaNotatek.appendChild(div);
-  }
-  }
-  
-  //funkcja edytująca notatkę
-  function edytujNotatke(notatka) {
+}
+
+//funkcja edytująca notatkę
+function edytujNotatke(notatka) {
   edytowanaNotatka = notatka;
   //wypełnienie pól formularza danymi notatki
   tytulInput.value = notatka.tytul;
   trescInput.value = notatka.tresc;
   kolorInput.value = notatka.kolor;
   pinInput.checked = notatka.pin;
-  }
-  
-  //funkcja usuwająca notatkę
-  function usunNotatke(notatka) {
+}
+
+//funkcja usuwająca notatkę
+function usunNotatke(notatka) {
   //usuwanie notatki z tablicy
   notatki = notatki.filter((el) => el !== notatka);
   //zapisanie notatek do localStorage
   localStorage.setItem("notatki", JSON.stringify(notatki));
   //renderowanie listy notatek
   renderujListeNotatek();
-  }
+}
