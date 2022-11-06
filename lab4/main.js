@@ -32,7 +32,17 @@ function dodajNotatke(e) {
     edytowanaNotatka.kolor = kolor;
     edytowanaNotatka.pin = pin;
     edytowanaNotatka = null;
-  } else {
+    // znajdowanie indeksu notatki w tablicy
+    let index = notatki.findIndex((notatka) => notatka.data === edytowanaNotatka.data);
+    // usunięcie notatki z tablicy
+    notatki.splice(index, 1);
+    // jeśli notatka jest przypięta, bedzie na początku
+    if (pin) {
+    notatki.unshift(edytowanaNotatka);
+    } else {
+    notatki.push(edytowanaNotatka);
+    }
+    } else {
     //tworzenie nowej notatki
     const nowaNotatka = {
       tytul,
@@ -42,8 +52,12 @@ function dodajNotatke(e) {
       data: Date.now(),
     };
     //dodanie notatki do tablicy
+    if (pin) {
+    notatki.unshift(nowaNotatka);
+    } else {
     notatki.push(nowaNotatka);
-  }
+    }
+    }
   //zapisanie notatek do localStorage
   localStorage.setItem("notatki", JSON.stringify(notatki));
   //renderowanie listy notatek
