@@ -53,7 +53,7 @@ function pobierzPrognoze() {
 function wyswietlPrognozy(prognozy) {
   menuPrognoz.textContent = "";
 
-  prognozy.forEach((prognoza) => {
+  prognozy.forEach((prognoza, indeks) => {
     const nowaPrognoza = document.createElement("div");
     nowaPrognoza.classList.add("pole_prognozy");
     nowaPrognoza.innerHTML = `
@@ -71,11 +71,20 @@ function wyswietlPrognozy(prognozy) {
                 <p>Temperatura minimalna: ${prognoza.temp_min}°C</p>
                 <p>Temperatura odczuwalna: ${prognoza.odczuwalna}°C</p>
         </div>
-        
+        <button class="usun_przycisk" data-index="${indeks}">Usuń</button>
         `;
-    menuPrognoz.appendChild(nowaPrognoza);
-  });
-}
-wyswietlPrognozy(prognozy);
-window.addEventListener("load", aktualizujPrognoze);
-przyciskSzukaj.addEventListener("click", pobierzPrognoze);
+        nowaPrognoza
+        .querySelector(".usun_przycisk")
+        .addEventListener("click", (e) => {
+          const indeks = e.target.getAttribute("data-index");
+          prognozy.splice(indeks, 1);
+          localStorage.setItem("prognozy", JSON.stringify(prognozy));
+          wyswietlPrognozy(prognozy);
+        });
+      menuPrognoz.appendChild(nowaPrognoza);
+    });
+  }
+  wyswietlPrognozy(prognozy);
+  window.addEventListener("load", aktualizujPrognoze);
+  przyciskSzukaj.addEventListener("click", pobierzPrognoze);
+  
