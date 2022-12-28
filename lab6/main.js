@@ -1,9 +1,17 @@
 const area = document.getElementById("area");
 const ball = document.getElementById("ball");
 const holeContainer = document.getElementById("holeContainer");
+const timer = document.getElementById("timer");
+
+setInterval(() => {
+  timer.innerHTML = (timeElapsed / 1000).toFixed(2) + " seconds";
+}, 100);
 
 let x = 0;
 let y = 0;
+let startTime;
+let timeElapsed = 0;
+let intervalId;
 
 area.style.width = "400px";
 area.style.height = "400px";
@@ -20,6 +28,13 @@ for (let i = 0; i < 5; i++) {
 }
 
 window.addEventListener("deviceorientation", (event) => {
+  if (!startTime) {
+    startTime = Date.now();
+    intervalId = setInterval(() => {
+      timeElapsed = Date.now() - startTime;
+    }, 1000);
+  }
+
   x += event.gamma / 10;
   y += event.beta / 10;
 
@@ -58,7 +73,6 @@ function randomHolePositions() {
 }
 
 }
-
 randomHolePositions();
 
 animate();
