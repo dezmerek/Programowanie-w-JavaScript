@@ -1,18 +1,23 @@
 const area = document.getElementById("area");
 const ball = document.getElementById("ball");
-const hole = document.getElementById("hole");
+const holeContainer = document.getElementById("holeContainer");
 
 let x = 0;
 let y = 0;
 
-// set the size of the area
 area.style.width = "400px";
 area.style.height = "400px";
 
-const holeWidth = hole.offsetWidth;
-const holeHeight = hole.offsetHeight;
 const areaWidth = area.offsetWidth;
 const areaHeight = area.offsetHeight;
+
+const holes = [];
+for (let i = 0; i < 5; i++) {
+  const hole = document.createElement("div");
+  hole.classList.add("hole");
+  holeContainer.appendChild(hole);
+  holes.push(hole);
+}
 
 window.addEventListener("deviceorientation", (event) => {
   x += event.gamma / 10;
@@ -26,28 +31,34 @@ function animate() {
   ball.style.left = x + "px";
   ball.style.top = y + "px";
 
-  if (
-    x > hole.offsetLeft &&
-    x < hole.offsetLeft + holeWidth &&
-    y > hole.offsetTop &&
-    y < hole.offsetTop + holeHeight
-  ) {
-    hole.style.display = "none";
-    randomHolePosition();
+  for (const hole of holes) {
+    if (
+      x > hole.offsetLeft &&
+      x < hole.offsetLeft + hole.offsetWidth &&
+      y > hole.offsetTop &&
+      y < hole.offsetTop + hole.offsetHeight
+    ) {
+      hole.style.display = "none";
+    }
   }
 
   requestAnimationFrame(animate);
 }
 
-function randomHolePosition() {
-  const x = Math.floor(Math.random() * (areaWidth - holeWidth));
-  const y = Math.floor(Math.random() * (areaHeight - holeHeight));
-
-  hole.style.left = x + "px";
-  hole.style.top = y + "px";
-  hole.style.display = "block";
+function randomHolePositions() {
+  for (const hole of holes) {
+    hole.style.display = "block";
+    hole.style.left = Math.floor(Math.random() * (areaWidth - hole.offsetWidth)) + "px";
+    hole.style.top = Math.floor(Math.random() * (areaHeight - hole.offsetHeight)) + "px";
+  }
+  for (const hole of holes) {
+  hole.addEventListener("mouseover", () => {
+    hole.style.display = "none";
+  });
 }
 
-randomHolePosition();
+}
+
+randomHolePositions();
 
 animate();
