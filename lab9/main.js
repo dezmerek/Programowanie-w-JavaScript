@@ -44,10 +44,14 @@ function aktualizujPrognoze() {
 }
 
 function pobierzPrognoze() {
-    const miasto = document.querySelector(".miasto").value;
-    const prognoza = {};
-    pobierzDanePrognozy(prognoza, miasto, "dodaj");
-    miasto.value = "";
+    if (prognozy.length === 10) {
+      alert("Przekroczono liczbę miast (max 10)");
+    } else {
+      const miasto = document.querySelector(".miasto").value;
+      const prognoza = {};
+      pobierzDanePrognozy(prognoza, miasto, "dodaj");
+      miasto.value = "";
+    }
   }
 
 function wyswietlPrognozy(prognozy) {
