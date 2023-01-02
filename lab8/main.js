@@ -6,7 +6,29 @@ canvas.height = window.innerHeight * 0.5;
 
 var kulki = [];
 var iloscKul = 10;
+var startBtn = document.getElementById("startBtn");
+var resetBtn = document.getElementById("resetBtn");
+var animacjaId;
 
+startBtn.addEventListener("click", function() {
+    animacjaId = requestAnimationFrame(rysuj);
+});
+
+resetBtn.addEventListener("click", function() {
+  cancelAnimationFrame(animacjaId);
+  kulki = [];
+  iloscKul = 10;
+  for (var i = 0; i < iloscKul; i++) {
+    var kulka = {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      dx: Math.random() * 3 - 1.5,
+      dy: Math.random() * 3 - 1.5,
+      promien: 10
+    };
+    kulki.push(kulka);
+  }
+});
 for (var i = 0; i < iloscKul; i++) {
   var kulka = {
     x: Math.random() * canvas.width,
@@ -30,13 +52,10 @@ function rysuj() {
     kulka.y += kulka.dy;
 
     if (kulka.x + kulka.promien > canvas.width || kulka.x - kulka.promien < 0) {
-      kulka.dx = -kulka.dx;
+        kulka.dx = -kulka.dx;
     }
-    if (
-      kulka.y + kulka.promien > canvas.height ||
-      kulka.y - kulka.promien < 0
-    ) {
-      kulka.dy = -kulka.dy;
+    if (kulka.y + kulka.promien > canvas.height || kulka.y - kulka.promien < 0) {
+        kulka.dy = -kulka.dy;
     }
   }
   requestAnimationFrame(rysuj);
