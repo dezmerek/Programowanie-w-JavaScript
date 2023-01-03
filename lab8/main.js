@@ -4,6 +4,9 @@ var ctx = canvas.getContext("2d");
 var iloscKul = document.querySelector("#iloscKul");
 var iloscKulWartosc
 
+var dystans = document.querySelector("#dystans");
+var dystansWartosc
+
 canvas.width = window.innerWidth * 0.5;
 canvas.height = window.innerHeight * 0.5;
 
@@ -63,9 +66,10 @@ function rysuj() {
     }
 
     for (var j = i + 1; j < iloscKulWartosc; j++) {
+        dystansWartosc = dystans.value
         var kulka2 = kulki[j];
         var odległość = Math.sqrt(Math.pow(kulka2.x - kulka1.x, 2) + Math.pow(kulka2.y - kulka1.y, 2));
-        if (odległość < 100) {
+        if (odległość < dystansWartosc) {
         ctx.beginPath();
         ctx.moveTo(kulka1.x, kulka1.y);
         ctx.lineTo(kulka2.x, kulka2.y);
