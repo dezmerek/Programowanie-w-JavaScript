@@ -47,22 +47,33 @@ for (var i = 0; i < iloscKulWartosc; i++) {
 function rysuj() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (var i = 0; i < iloscKulWartosc; i++) {
-    var kulka = kulki[i];
+    var kulka1 = kulki[i];
     ctx.beginPath();
-    ctx.arc(kulka.x, kulka.y, kulka.promien, 0, Math.PI * 2);
+    ctx.arc(kulka1.x, kulka1.y, kulka1.promien, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
-    kulka.x += kulka.dx;
-    kulka.y += kulka.dy;
+    kulka1.x += kulka1.dx;
+    kulka1.y += kulka1.dy;
 
-    if (kulka.x + kulka.promien > canvas.width || kulka.x - kulka.promien < 0) {
-        kulka.dx = -kulka.dx;
+    if (kulka1.x + kulka1.promien > canvas.width || kulka1.x - kulka1.promien < 0) {
+        kulka1.dx = -kulka1.dx;
     }
-    if (kulka.y + kulka.promien > canvas.height || kulka.y - kulka.promien < 0) {
-        kulka.dy = -kulka.dy;
+    if (kulka1.y + kulka1.promien > canvas.height || kulka1.y - kulka1.promien < 0) {
+        kulka1.dy = -kulka1.dy;
     }
-  }
-  requestAnimationFrame(rysuj);
-}
 
-rysuj();
+    for (var j = i + 1; j < iloscKulWartosc; j++) {
+        var kulka2 = kulki[j];
+        var odległość = Math.sqrt(Math.pow(kulka2.x - kulka1.x, 2) + Math.pow(kulka2.y - kulka1.y, 2));
+        if (odległość < 100) {
+        ctx.beginPath();
+        ctx.moveTo(kulka1.x, kulka1.y);
+        ctx.lineTo(kulka2.x, kulka2.y);
+        ctx.stroke();
+        }
+        }
+        }
+        requestAnimationFrame(rysuj);
+        }
+        
+        rysuj();
